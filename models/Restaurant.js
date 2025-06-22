@@ -166,7 +166,7 @@ module.exports = (sequelize, DataTypes) => {
       as: "reviews",
     });
     Restaurant.belongsToMany(models.Category, {
-      through: models.RestaurantCategories, // Fixed: use the actual model
+      through: models.RestaurantCategories,
       foreignKey: "restaurantId",
       otherKey: "categoryId",
       as: "categories",

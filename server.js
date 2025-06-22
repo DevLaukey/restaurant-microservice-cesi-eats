@@ -155,7 +155,7 @@ app.use(
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3004;
 
 // Declare server variable
 let server;
