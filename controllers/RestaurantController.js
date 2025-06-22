@@ -143,6 +143,52 @@ class RestaurantController {
     }
   }
 
+
+  // Get all restaurants with pagination and sorting
+  static async getAllRestaurants(req, res, next) {
+    try { 
+      const { page = 1, limit = 20, sortBy = "rating", sortOrder = "DESC" } = req.query;
+
+      const { count, rows: restaurants } = await Restaurant.findAndCountAll({
+        where: { isActive: true },
+        include: [
+          {
+            model: Item,
+            as: "items",
+            where: { isAvailable: true },
+            required: false,
+            limit: 3,
+            order: [["isPopular", "DESC"], ["rating", "DESC"]],
+          },
+        ],
+        limit: Math.min(parseInt(limit), 50),
+        offset: (parseInt(page) - 1) * parseInt(limit),
+        order: [[sortBy, sortOrder.toUpperCase()]],
+      });
+
+      const restaurantsWithStatus = restaurants.map((restaurant) => {
+        const restaurantData = restaurant.toSafeJSON();
+        restaurantData.isOpenNow = restaurant.isOpenNow();
+        return restaurantData;
+      });
+
+      res.json({
+        success: true,
+        restaurants: restaurantsWithStatus,
+        pagination: {
+          currentPage: parseInt(page),
+          totalPages: Math.ceil(count / parseInt(limit)),
+          totalCount: count,
+          hasNextPage: parseInt(page) < Math.ceil(count / parseInt(limit)),
+          hasPrevPage: parseInt(page) > 1,
+          limit: parseInt(limit),
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // Get owner's restaurant
   static async getMyRestaurant(req, res, next) {
     try {

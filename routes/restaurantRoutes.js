@@ -42,6 +42,7 @@ try {
 }
 
 // Public routes
+router.get("/", RestaurantController.getAllRestaurants);
 router.get("/search", RestaurantController.searchRestaurants);
 router.get("/popular", RestaurantController.getPopularRestaurants);
 router.get("/nearby", RestaurantController.getNearbyRestaurants);
