@@ -158,7 +158,7 @@ class MenuController {
         "name",
         "price",
         "sortOrder",
-        "createdAt",
+
         "isPopular",
         "isFeatured",
       ];
@@ -191,7 +191,6 @@ class MenuController {
         ],
         order: [
           [actualSortBy, actualSortOrder],
-          ["createdAt", "DESC"],
         ],
         limit: Math.min(parseInt(limit), 50),
         offset: (parseInt(page) - 1) * parseInt(limit),
