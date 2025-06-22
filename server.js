@@ -194,32 +194,6 @@ const startServer = async () => {
     await sequelize.authenticate();
     console.log("✅ Database connection established successfully.");
 
-    // Sync database models
-    try {
-      await sequelize.sync({
-        alter: process.env.NODE_ENV === "development",
-        force: process.env.DB_FORCE_SYNC === "true",
-      });
-      console.log("✅ Database models synchronized.");
-    } catch (syncError) {
-      if (
-        syncError.name === "SequelizeDatabaseError" &&
-        syncError.original?.code === "ER_TOO_MANY_KEYS"
-      ) {
-        console.error("❌ Database sync failed: Too many indexes on table.");
-        console.log("💡 Solution options:");
-        console.log(
-          "1. Set DB_FORCE_SYNC=true in your .env file to recreate tables"
-        );
-        console.log("2. Drop the problematic table manually");
-        console.log("3. Run: node scripts/resetDatabase.js");
-        throw new Error(
-          "Database has too many indexes. Please reset the database."
-        );
-      }
-      throw syncError;
-    }
-
     // Create upload directories
     const fs = require("fs");
     const uploadDirs = [

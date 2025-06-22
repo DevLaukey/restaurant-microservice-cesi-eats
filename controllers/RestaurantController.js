@@ -287,7 +287,6 @@ class RestaurantController {
             where: { isVisible: true },
             required: false,
             limit: 5,
-            order: [["createdAt", "DESC"]],
           },
         ],
       });
