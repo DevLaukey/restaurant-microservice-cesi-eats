@@ -75,7 +75,7 @@ class ItemController {
       const { count, rows: items } = await Item.findAndCountAll({
         where: whereClause,
         include: [{ model: Category, as: 'category' }],
-        order: [['sortOrder', 'ASC'], ['createdAt', 'DESC']],
+        order: [['sortOrder', 'ASC'], ],
         limit: parseInt(limit),
         offset: (parseInt(page) - 1) * parseInt(limit)
       });
