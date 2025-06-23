@@ -48,7 +48,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       tableName: "restaurant_categories",
       timestamps: true,
-      createdAt: "created_at",
       updatedAt: "updated_at",
       indexes: [
         {

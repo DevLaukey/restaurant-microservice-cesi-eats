@@ -684,7 +684,6 @@ class MenuController {
       const menuData = originalMenu.toJSON();
       delete menuData.id;
       delete menuData.uuid;
-      delete menuData.createdAt;
       delete menuData.updatedAt;
       delete menuData.items;
 
@@ -834,7 +833,6 @@ class MenuController {
           "isAvailable",
           "isFeatured",
           "isPopular",
-          "createdAt",
         ],
         include: [
           {
@@ -881,7 +879,6 @@ class MenuController {
           averageItemPrice: Math.round(averageItemPrice * 100) / 100,
           menuItemsCost: Math.round(menuItemsCost * 100) / 100,
           profitMargin: Math.round(profitMargin * 100) / 100,
-          createdAt: menu.createdAt,
         };
       });
 

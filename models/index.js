@@ -11,6 +11,13 @@ const sequelize = new Sequelize(
   {
     ...dbConfig,
     logging: console.log, // Enable logging to see SQL queries
+    define: {
+      // This will apply to ALL models globally
+      underscored: true, // This automatically converts camelCase to snake_case
+      timestamps: true,
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
   }
 );
 

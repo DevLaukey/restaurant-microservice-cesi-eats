@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ItemController = require("../controllers/ItemController");
+const { route } = require("./restaurantRoutes");
 
 
 
@@ -19,11 +20,9 @@ try {
 // Public routes
 router.get("/search", ItemController.searchItems);
 router.get("/popular", ItemController.getPopularItems);
-router.get(
-  "/restaurant/:restaurantUuid",
-  ItemController.getPublicRestaurantItems
-);
 
+// get restaurant items by uuid
+router.get("/restaurant/:restaurantUuid", ItemController.getRestaurantItemsByUuid);
 // Protected routes
 router.use(authMiddleware);
 router.post("/", ItemController.createItem);

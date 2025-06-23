@@ -8,7 +8,7 @@
     "dev": "nodemon server.js",
     "db:init": "node scripts/initDatabase.js",
     "db:test": "node scripts/testConnection.js",
-    "db:seed": "node scripts/seedData.js",
+    "db:seed": "node scripts/seedCategories.js",
     "db:reset": "node scripts/resetDatabase.js"
   },
   "dependencies": {
